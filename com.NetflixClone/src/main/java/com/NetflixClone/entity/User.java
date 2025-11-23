@@ -56,6 +56,18 @@ public class User {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name="user_watchlist",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name="video_id")
+    )
     private Set<Video> watchlist=new HashSet<>();
+
+    public void addToWatchList(Video video){
+        this.watchlist.add(video);
+    }
+    public void removeToWatchList(Video video){
+        this.watchlist.remove(video);
+    }
 
 }
